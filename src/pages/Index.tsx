@@ -6,20 +6,17 @@ import { getNextMatch, getBestTeam, getUpcomingMatches, getTopScorers, getTopAss
 import { Calendar, Trophy, Target, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-
 const Index = () => {
   const nextMatch = getNextMatch();
   const bestTeam = getBestTeam();
   const upcomingMatches = getUpcomingMatches(3);
   const topScorers = getTopScorers(5);
   const topAssists = getTopAssists(5);
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 gradient-hero">
+      <section className="pt-32 pb-20 px-4 gradient-hero bg-inherit">
         <div className="container mx-auto text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient">
             WE School Football League
@@ -31,8 +28,7 @@ const Index = () => {
       </section>
 
       {/* Next Match Section */}
-      {nextMatch && (
-        <section className="py-16 px-4 bg-card/30">
+      {nextMatch && <section className="py-16 px-4 bg-card/30">
           <div className="container mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-3">
@@ -44,12 +40,10 @@ const Index = () => {
               <MatchCard match={nextMatch} />
             </div>
           </div>
-        </section>
-      )}
+        </section>}
 
       {/* Best Team Section */}
-      {bestTeam && (
-        <section className="py-16 px-4">
+      {bestTeam && <section className="py-16 px-4">
           <div className="container mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-3">
@@ -64,8 +58,7 @@ const Index = () => {
               <TeamCard team={bestTeam} rank={1} />
             </div>
           </div>
-        </section>
-      )}
+        </section>}
 
       {/* Upcoming Matches Section */}
       <section className="py-16 px-4 bg-card/30">
@@ -77,9 +70,7 @@ const Index = () => {
             </Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {upcomingMatches.map((match) => (
-              <MatchCard key={match.id} match={match} />
-            ))}
+            {upcomingMatches.map(match => <MatchCard key={match.id} match={match} />)}
           </div>
         </div>
       </section>
@@ -97,9 +88,7 @@ const Index = () => {
                 </div>
               </div>
               <div className="space-y-4">
-                {topScorers.map((player) => (
-                  <PlayerCard key={player.id} player={player} showAssists={false} />
-                ))}
+                {topScorers.map(player => <PlayerCard key={player.id} player={player} showAssists={false} />)}
               </div>
             </div>
 
@@ -112,9 +101,7 @@ const Index = () => {
                 </div>
               </div>
               <div className="space-y-4">
-                {topAssists.map((player) => (
-                  <PlayerCard key={player.id} player={player} showGoals={false} />
-                ))}
+                {topAssists.map(player => <PlayerCard key={player.id} player={player} showGoals={false} />)}
               </div>
             </div>
           </div>
@@ -132,8 +119,6 @@ const Index = () => {
           <p>© 2025 WE School Football League. All rights reserved.</p>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
