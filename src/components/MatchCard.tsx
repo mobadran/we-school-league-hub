@@ -1,4 +1,4 @@
-import { Match, getTeamById } from "@/data/mockData";
+import { Match } from "@/repos/matches.repo";
 import { Card } from "./ui/card";
 import { Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -8,12 +8,10 @@ interface MatchCardProps {
 }
 
 const MatchCard = ({ match }: MatchCardProps) => {
-  const team1 = getTeamById(match.team1);
-  const team2 = getTeamById(match.team2);
+  const team1 = match.team1;
+  const team2 = match.team2;
 
-  if (!team1 || !team2) return null;
-
-  const isCompleted = match.status === 'completed';
+  const isCompleted = match.status === "completed";
 
   return (
     <Link to={`/match/${match.slug}`}>
@@ -22,9 +20,10 @@ const MatchCard = ({ match }: MatchCardProps) => {
           {/* Team 1 */}
           <div className="flex-1 text-center">
             <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-primary/10 flex items-center justify-center">
-              <span className="text-2xl font-bold text-primary">{team1.name.charAt(0)}</span>
+              <span className="text-2xl font-bold text-primary">
+                {team1.class}
+              </span>
             </div>
-            <h3 className="font-bold text-sm">{team1.name}</h3>
           </div>
 
           {/* Score or VS */}
@@ -32,9 +31,13 @@ const MatchCard = ({ match }: MatchCardProps) => {
             {isCompleted ? (
               <>
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl font-bold text-primary">{match.scoreTeam1}</span>
+                  <span className="text-3xl font-bold text-primary">
+                    {match.scoreTeam1}
+                  </span>
                   <span className="text-xl text-muted-foreground">-</span>
-                  <span className="text-3xl font-bold text-secondary">{match.scoreTeam2}</span>
+                  <span className="text-3xl font-bold text-secondary">
+                    {match.scoreTeam2}
+                  </span>
                 </div>
                 {match.wentToPenalties && (
                   <span className="text-xs text-muted-foreground">
@@ -43,7 +46,9 @@ const MatchCard = ({ match }: MatchCardProps) => {
                 )}
               </>
             ) : (
-              <span className="text-2xl font-bold text-muted-foreground">VS</span>
+              <span className="text-2xl font-bold text-muted-foreground">
+                VS
+              </span>
             )}
             <div className="flex items-center gap-1 text-xs text-muted-foreground">
               <Calendar className="w-3 h-3" />
@@ -54,9 +59,10 @@ const MatchCard = ({ match }: MatchCardProps) => {
           {/* Team 2 */}
           <div className="flex-1 text-center">
             <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-secondary/10 flex items-center justify-center">
-              <span className="text-2xl font-bold text-secondary">{team2.name.charAt(0)}</span>
+              <span className="text-2xl font-bold text-secondary">
+                {team2.class}
+              </span>
             </div>
-            <h3 className="font-bold text-sm">{team2.name}</h3>
           </div>
         </div>
       </Card>
