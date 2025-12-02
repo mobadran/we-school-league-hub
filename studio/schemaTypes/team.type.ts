@@ -2,28 +2,42 @@ import {defineField, defineType} from 'sanity'
 
 export const teamType = defineType({
   name: 'team',
-  title: 'فريق',
+  title: 'Team',
   type: 'document',
+  preview: {
+    select: {
+      teamClass: 'class',
+      image: 'image',
+      group: 'group',
+    },
+    prepare({teamClass, image, group}) {
+      return {
+        title: 'Class ' + teamClass,
+        subtitle: 'Group ' + group,
+        media: image,
+      }
+    },
+  },
   fields: [
     defineField({
       name: 'slug',
-      title: 'الاسم في الرابط',
+      title: 'Slug',
       type: 'slug',
       validation: (Rule) => Rule.required(),
       options: {
-        source: 'name',
+        source: 'class',
         slugify: (input) => String(input).trim().replace(/\s+/g, '-'),
       },
     }),
     defineField({
       name: 'class',
-      title: 'الصف',
+      title: 'Class',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'image',
-      title: 'الصورة',
+      title: 'Image',
       type: 'image',
       // validation: (Rule) => Rule.required(),
     }),
@@ -34,7 +48,7 @@ export const teamType = defineType({
     // }),
     defineField({
       name: 'group',
-      title: 'المجموعة',
+      title: 'Group',
       type: 'number',
       validation: (Rule) => Rule.required().min(1).max(3),
     }),

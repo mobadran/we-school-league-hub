@@ -2,12 +2,12 @@ import {defineField, defineType} from 'sanity'
 
 export const matchType = defineType({
   name: 'match',
-  title: 'مباراة',
+  title: 'Match',
   type: 'document',
   preview: {
     select: {
-      team1: 'team1.name',
-      team2: 'team2.name',
+      team1: 'team1.class',
+      team2: 'team2.class',
       date: 'date',
       image: 'image',
     },
@@ -22,21 +22,21 @@ export const matchType = defineType({
   fields: [
     defineField({
       name: 'team1',
-      title: 'الفريق الأول',
+      title: 'Team 1',
       type: 'reference',
       to: [{type: 'team'}],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'team2',
-      title: 'الفريق الثاني',
+      title: 'Team 2',
       type: 'reference',
       to: [{type: 'team'}],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
-      title: 'الاسم في الرابط',
+      title: 'Slug',
       type: 'slug',
       options: {
         source: (doc: any) =>
@@ -48,19 +48,19 @@ export const matchType = defineType({
     }),
     defineField({
       name: 'date',
-      title: 'موعد المباراة',
+      title: 'Date',
       type: 'date',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({name: 'image', title: 'صورة / بانر', type: 'image'}),
-    defineField({name: 'scoreTeam1', title: 'نتيجة الفريق الأول', type: 'number'}),
-    defineField({name: 'scoreTeam2', title: 'نتيجة الفريق الثاني', type: 'number'}),
-    defineField({name: 'wentToPenalties', title: 'وصلت لركلات الترجيح؟', type: 'boolean'}),
-    defineField({name: 'penaltyTeam1', title: 'ركلات الترجيح للفريق الأول', type: 'number'}),
-    defineField({name: 'penaltyTeam2', title: 'ركلات الترجيح للفريق الثاني', type: 'number'}),
+    defineField({name: 'image', title: 'Image', type: 'image'}),
+    defineField({name: 'scoreTeam1', title: 'Score Team 1', type: 'number'}),
+    defineField({name: 'scoreTeam2', title: 'Score Team 2', type: 'number'}),
+    defineField({name: 'wentToPenalties', title: 'Went To Penalties?', type: 'boolean'}),
+    defineField({name: 'penaltyTeam1', title: 'Penalty Team 1', type: 'number'}),
+    defineField({name: 'penaltyTeam2', title: 'Penalty Team 2', type: 'number'}),
     defineField({
       name: 'videos',
-      title: 'فيديوهات المباراة',
+      title: 'Videos',
       type: 'array',
       of: [
         {
