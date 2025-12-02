@@ -2,7 +2,13 @@ import Navigation from "@/components/Navigation";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getPlayerBySlug, Player } from "@/repos/players.repo";
-import { Target, Users, Trophy } from "lucide-react";
+import {
+  Target,
+  Users,
+  Trophy,
+  LucidePersonStanding,
+  LucideUser,
+} from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 const PlayerDetail = () => {
@@ -37,12 +43,13 @@ const PlayerDetail = () => {
           {/* Player Header */}
           <div className="mb-12 text-center">
             <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-primary flex items-center justify-center shadow-glow">
-              <span className="text-5xl font-bold">
+              {/* <span className="text-5xl font-bold">
                 {player.name
                   .split(" ")
                   .map((n) => n[0])
                   .join("")}
-              </span>
+              </span> */}
+              <LucideUser className="w-16 h-16" />
             </div>
             <h1 className="text-5xl font-bold mb-4 text-gradient">
               {player.name}
@@ -62,7 +69,7 @@ const PlayerDetail = () => {
             <Card className="p-8 text-center border-primary/50 bg-card/50 backdrop-blur">
               <Target className="w-12 h-12 text-primary mx-auto mb-4" />
               <div className="text-5xl font-bold text-primary mb-2">
-                {player.goals}
+                {player.goals || 0}
               </div>
               <p className="text-lg text-muted-foreground">Goals Scored</p>
             </Card>
@@ -70,7 +77,7 @@ const PlayerDetail = () => {
             <Card className="p-8 text-center border-secondary/50 bg-card/50 backdrop-blur">
               <Users className="w-12 h-12 text-secondary mx-auto mb-4" />
               <div className="text-5xl font-bold text-secondary mb-2">
-                {player.assists}
+                {player.assists || 0}
               </div>
               <p className="text-lg text-muted-foreground">Assists</p>
             </Card>
@@ -103,7 +110,7 @@ const PlayerDetail = () => {
                   Total Contributions
                 </span>
                 <span className="font-semibold text-gradient text-xl">
-                  {player.goals + player.assists}
+                  {(player.goals || 0) + (player.assists || 0)}
                 </span>
               </div>
             </div>

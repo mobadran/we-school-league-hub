@@ -15,7 +15,10 @@ export default function Teams() {
     })();
   }, []);
 
-  const classes = ["all", ...Array.from(new Set(teams.map((t) => t.class)))];
+  const classes = [
+    "all",
+    ...Array.from(new Set(teams.map((t) => t.class))).sort(),
+  ];
 
   const filteredTeams = teams
     .filter((team) => classFilter === "all" || team.class === classFilter)

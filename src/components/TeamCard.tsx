@@ -9,7 +9,6 @@ interface TeamCardProps {
 }
 
 const TeamCard = ({ team, rank }: TeamCardProps) => {
-  console.log(team);
   return (
     <Link to={`/team/${team.slug}`}>
       <Card className="p-6 hover:shadow-glow transition-all duration-300 cursor-pointer border-border/50 bg-card/50 backdrop-blur">
@@ -19,14 +18,11 @@ const TeamCard = ({ team, rank }: TeamCardProps) => {
           )}
           <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
             <span className="text-3xl font-bold text-primary">
-              {team.name?.charAt(0) || team.class}
+              {team.class}
             </span>
           </div>
           <div className="flex-1">
-            <h3 className="font-bold text-lg mb-1">
-              {team.name || team.class}
-            </h3>
-            <p className="text-sm text-muted-foreground">{team.class}</p>
+            {/* <h3 className="font-bold text-lg mb-1">{team.class}</h3> */}
           </div>
           <div className="flex items-center gap-2">
             <Trophy className="w-5 h-5 text-secondary" />

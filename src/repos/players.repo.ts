@@ -46,12 +46,22 @@ export const getPlayers = async (): Promise<Player[]> => {
 };
 
 export const getTopScorers = async (limit: number = 5): Promise<Player[]> => {
-  const query = `*[_type == "player"] ${playerProjection} | order(goals desc)[0...$limit]`;
+  const query = `
+    *[_type == "player"]
+      ${playerProjection}
+      | order(coalesce(goals, 0) desc)[0...$limit]
+  `;
+
   return client.fetch<Player[]>(query, { limit });
 };
 
 export const getTopAssists = async (limit: number = 5): Promise<Player[]> => {
-  const query = `*[_type == "player"] ${playerProjection} | order(assists desc)[0...$limit]`;
+  const query = `
+  *[_type == "player"]
+    | order(coalesce(assists, 0) desc)
+    [0...$limit]
+    ${playerProjection}
+`;
   return client.fetch<Player[]>(query, { limit });
 };
 

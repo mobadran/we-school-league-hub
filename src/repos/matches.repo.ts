@@ -50,8 +50,13 @@ const matchProjection = `{
 }`;
 
 export const getMatches = async (): Promise<Match[]> => {
-  const query = `*[_type == "match"] ${matchProjection} | order(date desc)`;
-  return client.fetch<Match[]>(query);
+  const completedQuery = `*[_type == "match" && defined(scoreTeam1) && defined(scoreTeam2)] ${matchProjection} | order(date desc)`;
+  const upcomingQuery = `*[_type == "match" && !defined(scoreTeam1) && !defined(scoreTeam2)] ${matchProjection} | order(date asc)`;
+
+  const completed = await client.fetch<Match[]>(completedQuery);
+  const upcoming = await client.fetch<Match[]>(upcomingQuery);
+
+  return [...completed, ...upcoming];
 };
 
 export const getUpcomingMatches = async (limit?: number): Promise<Match[]> => {
